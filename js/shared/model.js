@@ -9,7 +9,7 @@ const model = {
 
   // del 1
   app: {
-    currentPageIndex: 0,
+    currentPageIndex: cafeMenu,
     selectedProduct: null,
   },
 
