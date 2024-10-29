@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>products/cafeMenuController.js - Documentation</title>
+    <title>admin/pickedUpOrdersController.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -35,7 +35,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">products/cafeMenuController.js</h1>
+    <h1 class="page-title">admin/pickedUpOrdersController.js</h1>
     
 
     
@@ -46,79 +46,76 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * Bytter aktiv fane i kafémenyen og oppdaterer visningen.
+ * Kontroller for håndtering av hentede bestillinger.
  *
- * Funksjonen oppdaterer den aktive fanen i `model.inputs.cafeMenu` til den nye verdien som
- * angis av `value`, og kaller deretter `updateView()` for å rendre innholdet for den valgte fanen.
- *
- * @function
- * @name switchTab
- * @param {string} value - Verdien som representerer den nye aktive fanen.
- * @example
- * // Bytt til en ny fane og oppdater visningen:
- * switchTab('baguette');
+ * `pickedUpOrdersController` administrerer visning og søk av bestillinger med status 'Hentet'.
  */
-function switchTab(value) {
-  model.inputs.cafeMenu.tab = value;
-  updateView();
-}
+const pickedUpOrdersController = {
+  /**
+   * Initialiserer `pickedUpOrdersController` ved å vise bestillingene som er hentet.
+   */
+  init() {
+    this.displayOrders();
+  },
+
+  /**
+   * Utfører et søk på hentede bestillinger ved å bruke søkefunksjonen.
+   *
+   * Funksjonen henter verdien fra søkefeltet og kaller `displayOrders` med søkekriteriet.
+   *
+   * @function searchOrders
+   */
+  searchOrders() {
+    const searchQuery = document
+      .getElementById('searchInput')
+      .value.trim()
+      .toLowerCase();
+    this.displayOrders(searchQuery);
+  },
+
+  /**
+   * Tilbakestiller søkefeltet og viser alle hentede bestillinger.
+   *
+   * Funksjonen nullstiller søkefeltet til en tom verdi og kaller deretter `displayOrders`
+   * for å vise alle bestillinger som er hentet.
+   *
+   * @function resetSearch
+   */
+  resetSearch() {
+    document.getElementById('searchInput').value = '';
+    this.displayOrders();
+  },
+
+  /**
+   * Filtrerer og viser hentede bestillinger basert på søkekriterier.
+   *
+   * Henter bestillingene som har status 'Hentet' fra `model.orders` og sender dem videre
+   * til `pickedUpOrdersView.renderOrders` for å bli vist i grensesnittet.
+   *
+   * @function displayOrders
+   * @param {string} [searchQuery=''] - Søkekriterium for kundenavn eller bestillings-ID.
+   * @private
+   */
+  displayOrders(searchQuery = '') {
+    const orders = model.orders.filter((order) => order.status === 'Hentet');
+    pickedUpOrdersView.renderOrders(orders, searchQuery);
+  },
+};
 
 /**
- * Oppdaterer kommentarfeltet for tilpasninger i kafémenyen.
+ * Lytter til `DOMContentLoaded`-hendelsen for å initialisere `pickedUpOrdersController`.
  *
- * Funksjonen tar inn en tekstverdi og lagrer den i `model.inputs.cafeMenu.message`.
- * Denne teksten kan inneholde eventuelle tilpasninger eller kommentarer for kaféprodukter.
+ * Når dokumentet er ferdig lastet, kalles `pickedUpOrdersController.init()` for å sette opp visningen
+ * av hentede bestillinger.
  *
- * @function
- * @name updateComment
- * @param {string} value - Teksten som representerer tilpasningen eller kommentaren.
- * @example
- * // Oppdater kommentaren til en tilpasset tekst:
- * updateComment('Ekstra sterk kaffe');
+ * @event DOMContentLoaded
  */
-function updateCafeProductComment(value) {
-  model.inputs.cafeMenu.message = value;
-}
-
-/**
- * Legger et produkt fra kafémenyen til handlekurven.
- *
- * Denne funksjonen henter produktet basert på dets ID, kombinerer det med eventuelle tilpasninger
- * (slik som kommentarer fra brukeren), og legger det til i handlekurven med angitt antall.
- *
- * @function addCafeProductToCart
- * @param {string} id - ID-en til produktet som skal legges til i handlekurven.
- */
-function addCafeProductToCart(id) {
-  const product = getProductFromId(id);
-
-  if (!product) {
-    console.error('Produktet ble ikke funnet.');
-    return;
-  }
-
-  const quantity =
-    model.app.selectedProduct != null ? model.inputs.cafeMenu.quantity : 1;
-  const message = model.inputs.cafeMenu.message;
-
-  // Kombiner produktnavn med eventuelle tilpasninger (f.eks. kommentar)
-  const productName = product.productName;
-
-  // Kall `addToCart` direkte med alle nødvendige parametere
-  addToCart(
-    productName,
-    product.unitPrice,
-    product.productId,
-    quantity,
-    message,
-  );
-
-  // Lukk overlay hvis det er åpent
-  closeOverlay();
-  updateView();
-}
-
-window.addCafeProductToCart = addCafeProductToCart;
+document.addEventListener('DOMContentLoaded', function () {
+  pickedUpOrdersController.init();
+});
+document.addEventListener('DOMContentLoaded', function () {
+  pickedUpOrdersController.init();
+});
 </code></pre>
         </article>
     </section>

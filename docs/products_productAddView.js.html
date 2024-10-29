@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>products/cafeMenuController.js - Documentation</title>
+    <title>products/productAddView.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -35,7 +35,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">products/cafeMenuController.js</h1>
+    <h1 class="page-title">products/productAddView.js</h1>
     
 
     
@@ -45,80 +45,100 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * Bytter aktiv fane i kafémenyen og oppdaterer visningen.
- *
- * Funksjonen oppdaterer den aktive fanen i `model.inputs.cafeMenu` til den nye verdien som
- * angis av `value`, og kaller deretter `updateView()` for å rendre innholdet for den valgte fanen.
- *
- * @function
- * @name switchTab
- * @param {string} value - Verdien som representerer den nye aktive fanen.
- * @example
- * // Bytt til en ny fane og oppdater visningen:
- * switchTab('baguette');
- */
-function switchTab(value) {
-  model.inputs.cafeMenu.tab = value;
-  updateView();
-}
+            <pre class="prettyprint source linenums"><code>const productAddView = {
+  /**
+   * Renderer skjemaet for å legge til et nytt produkt.
+   *
+   * Funksjonen oppretter HTML-strukturen for skjemaet, inkludert felt for produktnavn, kategori,
+   * pris, lagerbeholdning, beskrivelse, bilde-URL, og forhåndsbestilling. Kategorivalget styrer
+   * også visningen av tilleggsfeltet "Type" basert på valgt kategori.
+   *
+   * @function renderForm
+   */
+  renderForm() {
+    const form = document.getElementById('addProductForm');
+    form.classList.add('add-product-form');
 
-/**
- * Oppdaterer kommentarfeltet for tilpasninger i kafémenyen.
- *
- * Funksjonen tar inn en tekstverdi og lagrer den i `model.inputs.cafeMenu.message`.
- * Denne teksten kan inneholde eventuelle tilpasninger eller kommentarer for kaféprodukter.
- *
- * @function
- * @name updateComment
- * @param {string} value - Teksten som representerer tilpasningen eller kommentaren.
- * @example
- * // Oppdater kommentaren til en tilpasset tekst:
- * updateComment('Ekstra sterk kaffe');
- */
-function updateCafeProductComment(value) {
-  model.inputs.cafeMenu.message = value;
-}
+    form.innerHTML = `
+      &lt;div class="add-product-form__group">
+        &lt;label for="productName" class="add-product-form__label">Produktnavn:&lt;/label>
+        &lt;input type="text" id="productName" class="add-product-form__input" required />
+      &lt;/div>
 
-/**
- * Legger et produkt fra kafémenyen til handlekurven.
- *
- * Denne funksjonen henter produktet basert på dets ID, kombinerer det med eventuelle tilpasninger
- * (slik som kommentarer fra brukeren), og legger det til i handlekurven med angitt antall.
- *
- * @function addCafeProductToCart
- * @param {string} id - ID-en til produktet som skal legges til i handlekurven.
- */
-function addCafeProductToCart(id) {
-  const product = getProductFromId(id);
+      &lt;div class="add-product-form__group">
+        &lt;label for="category" class="add-product-form__label">Kategori:&lt;/label>
+        &lt;select id="category" class="add-product-form__select" onchange="productAddView.handleCategoryChange()" required>
+          &lt;option value="" disabled selected>Velg kategori&lt;/option>
+          &lt;option value="0">Baguette&lt;/option>
+          &lt;option value="1">Snitter&lt;/option>
+          &lt;option value="2">Kaffe&lt;/option>
+          &lt;option value="3">Kake&lt;/option>
+        &lt;/select>
+      &lt;/div>
 
-  if (!product) {
-    console.error('Produktet ble ikke funnet.');
-    return;
-  }
+      &lt;div class="add-product-form__group" id="typeField" style="display: none;">
+        &lt;label for="type" class="add-product-form__label">Type:&lt;/label>
+        &lt;input type="text" id="type" class="add-product-form__input" value="standard" disabled />
+      &lt;/div>
 
-  const quantity =
-    model.app.selectedProduct != null ? model.inputs.cafeMenu.quantity : 1;
-  const message = model.inputs.cafeMenu.message;
+      &lt;div class="add-product-form__group">
+        &lt;label for="unitPrice" class="add-product-form__label">Pris:&lt;/label>
+        &lt;input type="number" id="unitPrice" class="add-product-form__input" required />
+      &lt;/div>
 
-  // Kombiner produktnavn med eventuelle tilpasninger (f.eks. kommentar)
-  const productName = product.productName;
+      &lt;div class="add-product-form__group">
+        &lt;label for="unitsInStock" class="add-product-form__label">Lagerbeholdning:&lt;/label>
+        &lt;input type="number" id="unitsInStock" class="add-product-form__input" required />
+      &lt;/div>
 
-  // Kall `addToCart` direkte med alle nødvendige parametere
-  addToCart(
-    productName,
-    product.unitPrice,
-    product.productId,
-    quantity,
-    message,
-  );
+      &lt;div class="add-product-form__group">
+        &lt;label for="description" class="add-product-form__label">Beskrivelse:&lt;/label>
+        &lt;textarea id="description" class="add-product-form__textarea" required>&lt;/textarea>
+      &lt;/div>
 
-  // Lukk overlay hvis det er åpent
-  closeOverlay();
-  updateView();
-}
+      &lt;div class="add-product-form__group">
+        &lt;label for="imageUrl" class="add-product-form__label">Bilde URL:&lt;/label>
+        &lt;div class="add-product-form__input-wrapper">
+          &lt;input type="text" id="imageUrl" class="add-product-form__input" required />
+          &lt;small class="add-product-form__help-text">Bruk "&lt;em>standard-produktbilde.webp&lt;/em>" hvis det ikke finnes et bilde for produktet ennå.&lt;/small>
+        &lt;/div>
+      &lt;/div>
 
-window.addCafeProductToCart = addCafeProductToCart;
+      &lt;div class="add-product-form__group">
+        &lt;label for="preorderRequired" class="add-product-form__label">Forhåndsbestilling 7 dager:&lt;/label>
+        &lt;input type="checkbox" id="preorderRequired" class="add-product-form__checkbox" />
+      &lt;/div>
+
+      &lt;div class="add-product-form__actions">
+        &lt;button type="button" class="add-product-form__button add-product-form__button--save" onclick="productAddController.addProduct()">Lagre Produkt&lt;/button>
+        &lt;button type="button" class="add-product-form__button add-product-form__button--cancel" onclick="window.history.back()">Avbryt&lt;/button>
+      &lt;/div>
+    `;
+  },
+
+  /**
+   * Håndterer endring av kategorifeltet og oppdaterer skjemaet basert på valgt kategori.
+   *
+   * Hvis kategorien "Kake" er valgt, vises "Type"-feltet, og forhåndsbestillingsfeltet settes til
+   * standardverdi "checked". For alle andre kategorier skjules "Type"-feltet, og forhåndsbestilling
+   * settes til "unchecked".
+   *
+   * @function handleCategoryChange
+   */
+  handleCategoryChange() {
+    const categorySelect = document.getElementById('category');
+    const typeField = document.getElementById('typeField');
+
+    // Show 'type' field only when Kake category is selected (index 3)
+    if (categorySelect.value === '3') {
+      typeField.style.display = 'flex';
+      document.getElementById('preorderRequired').checked = true; // Set default to true
+    } else {
+      typeField.style.display = 'none';
+      document.getElementById('preorderRequired').checked = false; // Default to false
+    }
+  },
+};
 </code></pre>
         </article>
     </section>
