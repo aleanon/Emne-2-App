@@ -5,7 +5,6 @@
  * og gir mulighet til å oppdatere status for hver bestilling.
  */
 const ordersView = {
-
   /**
    * Renderer bestillinger i brukergrensesnittet, filtrert etter status og søkekriterier.
    *
@@ -24,22 +23,28 @@ const ordersView = {
     ordersContainer.innerHTML = '';
 
     let filteredOrders = orders;
-    if (statusFilter === "Alle") {
-      filteredOrders = filteredOrders.filter(order => order.status !== "Hentet");
+    if (statusFilter === 'Alle') {
+      filteredOrders = filteredOrders.filter(
+        (order) => order.status !== 'Hentet',
+      );
     } else {
-      filteredOrders = filteredOrders.filter(order => order.status === statusFilter);
+      filteredOrders = filteredOrders.filter(
+        (order) => order.status === statusFilter,
+      );
     }
 
     if (searchQuery) {
       filteredOrders = filteredOrders.filter((order) => {
-        const nameMatch = order.customerName.toLowerCase().includes(searchQuery.toLowerCase());
+        const nameMatch = order.customerName
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase());
         const idMatch = order.orderId.toString().includes(searchQuery);
         return nameMatch || idMatch;
       });
     }
 
     if (orders.length === 0) {
-      this.renderNoResultsMessage("Ingen bestillinger funnet.");
+      this.renderNoResultsMessage('Ingen bestillinger funnet.');
       return;
     }
 
@@ -54,8 +59,8 @@ const ordersView = {
           <div>${order.orderId}</div>
         </div>
         <div class="orders-table__column orders-table__column--customer">
-          <div>${order.customerName}</div>
-          <div>${order.contactNumber}</div>
+          <div>${safeText(order.customerName)}</div>
+          <div>${safeText(order.contactNumber)}</div>
         </div>
         <div class="orders-table__column orders-table__column--products">
           ${renderOrderedProductsHtml(order.products)}
@@ -96,7 +101,7 @@ const ordersView = {
   renderNoResultsMessage(message) {
     const ordersContainer = document.getElementById('orders');
     ordersContainer.innerHTML = `<p class="orders-search__no-result">${message}</p>`;
-  }
+  },
 };
 
 /**
@@ -152,9 +157,9 @@ function renderOrderedProductsHtml(orderProducts) {
   orderProducts.forEach((product) => {
     html += `
       <div class="orders__product">
-        <div class="orders__product-name">${product.productName}</div>
-        <div class="orders__product-quantity">Antall: ${product.quantity}</div>
-        <div class="orders__product-comment">${product.comment}</div>
+        <div class="orders__product-name">${safeText(product.productName)}</div>
+        <div class="orders__product-quantity">Antall: ${safeText(product.quantity)}</div>
+        <div class="orders__product-comment">${safeText(product.comment)}</div>
       </div>
     `;
   });

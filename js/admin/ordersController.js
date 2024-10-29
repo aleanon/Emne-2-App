@@ -60,12 +60,14 @@ const ordersController = {
 
     if (!isNaN(searchQuery) && searchQuery !== '') {
       const orderId = parseInt(searchQuery, 10);
-      const orders = model.orders.filter(order => order.orderId === orderId);
+      const orders = model.orders.filter((order) => order.orderId === orderId);
 
       if (orders.length > 0) {
         ordersView.renderOrders(orders);
       } else {
-        ordersView.renderNoResultsMessage(`Ingen bestilling funnet med ID ${orderId}`);
+        ordersView.renderNoResultsMessage(
+          `Ingen bestilling funnet med ID ${orderId}`,
+        );
       }
     } else {
       this.displayOrders(statusFilter, searchQuery.toLowerCase());
@@ -85,9 +87,11 @@ const ordersController = {
    * @private
    */
   displayOrders(statusFilter = 'Alle', searchQuery = '') {
-    const orders = model.orders.filter(order =>
-      (statusFilter === 'Alle' || order.status === statusFilter) &&
-      (searchQuery === '' || order.customerName.toLowerCase().includes(searchQuery))
+    const orders = model.orders.filter(
+      (order) =>
+        (statusFilter === 'Alle' || order.status === statusFilter) &&
+        (searchQuery === '' ||
+          order.customerName.toLowerCase().includes(searchQuery)),
     );
     ordersView.renderOrders(orders);
   },
@@ -133,3 +137,12 @@ const ordersController = {
 document.addEventListener('DOMContentLoaded', () => {
   ordersController.init();
 });
+
+function safeText(text) {
+  const sanitizedText = DOMPurify.sanitize(text);
+  return sanitizedText
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;');
+}
