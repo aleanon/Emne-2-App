@@ -1,18 +1,4 @@
-const productAddView = {
-  /**
-   * Renderer skjemaet for å legge til et nytt produkt.
-   *
-   * Funksjonen oppretter HTML-strukturen for skjemaet, inkludert felt for produktnavn, kategori,
-   * pris, lagerbeholdning, beskrivelse, bilde-URL, og forhåndsbestilling. Kategorivalget styrer
-   * også visningen av tilleggsfeltet "Type" basert på valgt kategori.
-   *
-   * @function renderForm
-   */
-  renderForm() {
-    const form = document.getElementById('addProductForm');
-    form.classList.add('add-product-form');
-
-    form.innerHTML = `
+let productAddView={renderForm(){var d=document.getElementById("addProductForm");d.classList.add("add-product-form"),d.innerHTML=`
       <div class="add-product-form__group">
         <label for="productName" class="add-product-form__label">Produktnavn:</label>
         <input type="text" id="productName" class="add-product-form__input" required />
@@ -66,29 +52,4 @@ const productAddView = {
         <button type="button" class="add-product-form__button add-product-form__button--save" onclick="productAddController.addProduct()">Lagre Produkt</button>
         <button type="button" class="add-product-form__button add-product-form__button--cancel" onclick="window.history.back()">Avbryt</button>
       </div>
-    `;
-  },
-
-  /**
-   * Håndterer endring av kategorifeltet og oppdaterer skjemaet basert på valgt kategori.
-   *
-   * Hvis kategorien "Kake" er valgt, vises "Type"-feltet, og forhåndsbestillingsfeltet settes til
-   * standardverdi "checked". For alle andre kategorier skjules "Type"-feltet, og forhåndsbestilling
-   * settes til "unchecked".
-   *
-   * @function handleCategoryChange
-   */
-  handleCategoryChange() {
-    const categorySelect = document.getElementById('category');
-    const typeField = document.getElementById('typeField');
-
-    // Show 'type' field only when Kake category is selected (index 3)
-    if (categorySelect.value === '3') {
-      typeField.style.display = 'flex';
-      document.getElementById('preorderRequired').checked = true; // Set default to true
-    } else {
-      typeField.style.display = 'none';
-      document.getElementById('preorderRequired').checked = false; // Default to false
-    }
-  },
-};
+    `},handleCategoryChange(){var d=document.getElementById("category"),e=document.getElementById("typeField");"3"===d.value?(e.style.display="flex",document.getElementById("preorderRequired").checked=!0):(e.style.display="none",document.getElementById("preorderRequired").checked=!1)}};
