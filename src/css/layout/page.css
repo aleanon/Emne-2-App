@@ -39,8 +39,8 @@
   max-width: 300px;
   margin: 2em auto;
   padding: 12px 20px;
-  background-color: #6b7b6d;
-  color: #ffffff;
+  background-color: var(--color-background);
+  color: var(--color-text--light-bg);
   border: none;
   border-radius: 8px;
   font-size: var(--sizeM);
@@ -54,7 +54,8 @@
 }
 
 #installButton:hover {
-  background-color: #56705a;
+  background-color: var(--color-secondary--dark);
+  color: var(--color-text--dark-bg);
   transform: translateY(-2px);
 }
 
