@@ -95,3 +95,8 @@ function formatDateTime(dateString, timeString) {
   const [year, month, day] = dateString.split('-');
   return `${day}-${month}-${year} ${timeString}`;
 }
+
+function goToCafeMenu() {
+  model.app.currentPageIndex = model.pages.indexOf('kafeMeny');
+  updateView();
+}

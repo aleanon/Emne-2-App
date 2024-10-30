@@ -4,7 +4,6 @@
  * `loginModel` inneholder en liste over brukere og metoder for å sjekke brukerlegitimasjon.
  */
 const loginModel = {
-
   /**
    * Liste over registrerte brukere.
    * @type {Array<{employeeID: string, password: string}>}

@@ -19,11 +19,21 @@ function createCheckoutView() {
   return container;
 }
 
-function generateTimeOptions() {
-  const openingTime = 8; // 08:00
-  const closingTime = 16; // 16:00
-  let options = '';
+function generateTimeOptions(selectedDate) {
+  const selectedDay = dayjs(selectedDate).day();
+  let openingTime = 8;
+  let closingTime = 16;
 
+  if (selectedDay === 6) {
+    // Saturday
+    openingTime = 9;
+    closingTime = 15;
+  } else if (selectedDay === 0) {
+    // Sunday
+    return ''; // No options for Sunday
+  }
+
+  let options = '';
   for (let hour = openingTime; hour < closingTime; hour++) {
     const time24 = `${hour.toString().padStart(2, '0')}:00`;
     options += `<option value="${time24}">${time24}</option>`;
@@ -32,26 +42,40 @@ function generateTimeOptions() {
       options += `<option value="${time24Half}">${time24Half}</option>`;
     }
   }
-
   return options;
 }
 
 function createPickupTimeView() {
   const today = dayjs();
-  const maxDate = today.add(14, 'day');
+
+  const hasCake = model.inputs.shoppingCart.products.some((cartItem) => {
+    const product = model.products.find(
+      (p) => p.productId === cartItem.productId,
+    );
+    return product && product.categoryIndex === 3; // Returns true if the product is a cake
+  });
+
+  const minDate = hasCake ? today.add(7, 'day') : today;
+  const maxDate = today.add(6, 'month');
+
+  const helpText = hasCake
+    ? 'Kakebestillinger krever minst 7 dagers forhåndsbestilling. <br> Åpningstider: Man–Fre 08:00–16:00, Lør 09:00–15:00.'
+    : 'Velg en dato fra og med i dag. <br>Åpningstider: Man–Fre 08:00–16:00, Lør 09:00–15:00.';
 
   return /* HTML */ `
     <div class="checkout-container">
       <h2>Velg hentetidspunkt</h2>
+
+      <p class="checkout__help-text">${helpText}</p>
 
       <div class="date-picker-container">
         <label for="pickup-date">Dato:</label>
         <input
           type="date"
           id="pickup-date"
-          min="${today.format('YYYY-MM-DD')}"
+          min="${minDate.format('YYYY-MM-DD')}"
           max="${maxDate.format('YYYY-MM-DD')}"
-          onchange="updatePickupDate(this.value)"
+          onchange="handleDateChange(this.value)"
         />
       </div>
 
@@ -59,7 +83,7 @@ function createPickupTimeView() {
         <label for="pickup-time">Tid:</label>
         <select id="pickup-time" onchange="updatePickupTime(this.value)">
           <option value="">Velg tid</option>
-          ${generateTimeOptions()}
+          ${generateTimeOptions(minDate.format('YYYY-MM-DD'))}
         </select>
       </div>
 
@@ -73,6 +97,53 @@ function createPickupTimeView() {
       </div>
     </div>
   `;
+}
+
+function isDateSelectable(date) {
+  const dayOfWeek = dayjs(date).day();
+  return dayOfWeek !== 0; // Exclude Sunday (0 = Sunday)
+}
+
+function updateAvailableTimes(selectedDate) {
+  const timeOptions = generateTimeOptions(selectedDate); // Get options for the selected date
+  const timeSelect = document.getElementById('pickup-time');
+
+  // Update the inner HTML of the time <select> element
+  timeSelect.innerHTML = `<option value="">Velg tid</option>${timeOptions}`;
+}
+
+// Handle date selection, ensuring no Sundays and correct pickup time options
+function handleDateChange(selectedDate) {
+  if (isDateSelectable(selectedDate)) {
+    model.inputs.shoppingCart.pickUpSchedule.date = selectedDate;
+    console.log('Selected date:', selectedDate); // Debug log
+    updateAvailableTimes(selectedDate);
+  } else {
+    alert('Søndager er ikke tilgjengelige for henting.');
+    document.getElementById('pickup-date').value = '';
+    document.getElementById('pickup-time').innerHTML =
+      '<option value="">Velg tid</option>';
+  }
+}
+
+function updatePickupTime(time) {
+  model.inputs.shoppingCart.pickUpSchedule.time = time;
+  console.log('Selected time:', time); // Debug log
+}
+
+function goToCustomerInfo() {
+  const date = model.inputs.shoppingCart.pickUpSchedule.date;
+  const time = model.inputs.shoppingCart.pickUpSchedule.time;
+
+  console.log('Checking date and time:', date, time); // Debug log
+
+  if (!date || !time) {
+    alert('Vennligst velg både dato og tid for henting');
+    return;
+  }
+
+  model.inputs.shoppingCart.case = 'NameAndNumber';
+  updateView();
 }
 
 function createCustomerInfoView() {

@@ -57,7 +57,7 @@
 }
 
 .overlay__title {
-  font-size: 2rem;
+  font-size: var(--sizeXl);
   font-weight: 700;
   color: var(--color-secondary--dark);
   text-align: center;
@@ -79,7 +79,7 @@
 }
 
 .overlay__price {
-  font-size: 1.8rem;
+  font-size: var(--sizeXl);
   color: var(--color-primary);
   font-weight: bold;
   margin-bottom: 20px;
@@ -87,7 +87,7 @@
 }
 
 .overlay__description {
-  font-size: 1rem;
+  font-size: var(--sizeM);
   color: var(--color-secondary--dark);
   margin-bottom: 20px;
   text-align: center;
@@ -122,7 +122,7 @@
 .overlay__flavorSelect {
   width: 100%;
   padding: 12px;
-  font-size: 1rem;
+  font-size: var(--sizeM);
   border: 1px solid var(--color-primary);
   border-radius: 12px;
   background-color: var(--color-accent--cold);
@@ -157,7 +157,7 @@
 .overlay__quantity-input {
   width: 80px;
   padding: 12px;
-  font-size: 1rem;
+  font-size: var(--sizeM);
   text-align: center;
   border: 2px solid var(--color-primary);
   border-radius: 12px;
@@ -172,10 +172,12 @@
   border: none;
   border-radius: 12px;
   cursor: pointer;
-  font-size: 1.1rem;
+  font-size: var(--sizeL);
   font-weight: bold;
   text-align: center;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
 }
 
@@ -220,7 +222,6 @@
     width: 100%;
   }
 }
-
 
 @media (min-width: 768px) {
   .overlay-footer {

@@ -12,8 +12,10 @@
 }
 
 .modal__content {
-  background-color: var(--color-background); /* Background consistent with design */
-  padding: 1.5rem;
+  background-color: var(
+    --color-background
+  ); /* Background consistent with design */
+  padding: var(--sizeXl);
   border-radius: 8px;
   box-shadow: 0 4px 8px var(--color-shadow); /* Matching shadow */
   text-align: center;
@@ -21,8 +23,8 @@
 }
 
 .modal__button {
-  margin: 0.5rem;
-  padding: 0.75rem 1.5rem;
+  margin: var(--sizeXs);
+  padding: var(--sizeS) var(--sizeXl);
   border: none;
   border-radius: 5px;
   cursor: pointer;

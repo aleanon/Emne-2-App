@@ -1,3 +1,17 @@
+function saveCartToLocalStorage() {
+  localStorage.setItem(
+    'shoppingCart',
+    JSON.stringify(model.inputs.shoppingCart.products),
+  );
+}
+
+function loadCartFromLocalStorage() {
+  const savedCart = localStorage.getItem('shoppingCart');
+  if (savedCart) {
+    model.inputs.shoppingCart.products = JSON.parse(savedCart);
+  }
+}
+
 function addToCart(name, price, productId, quantity = 1, message) {
   const cart = model.inputs.shoppingCart.products;
   const existingItem = cart.find((item) => item.name === name);
@@ -9,7 +23,7 @@ function addToCart(name, price, productId, quantity = 1, message) {
   }
   updateCartButtonView();
   showCartNotification('Produkt lagt til i handlekurv');
-  // updateCart('add');
+  saveCartToLocalStorage();
 }
 
 function setCartItemMessage(itemIndex, text) {
@@ -21,7 +35,7 @@ function removeFromCart(itemIndex) {
   updateView();
   updateCartButtonView();
   showCartNotification('Produkt fjernet fra handlevogn');
-  // updateCart('remove');
+  saveCartToLocalStorage();
 }
 
 function clearCart() {
@@ -29,38 +43,8 @@ function clearCart() {
   updateView();
   updateCartButtonView();
   showCartNotification('Handlevognen er nå tom');
-  // updateCart('clear');
+  saveCartToLocalStorage();
 }
-
-// function updateCart(action) {
-//   const cartLink = document.getElementById('cartLink');
-//   const cartCount = document.getElementById('cartCount');
-//   const count = model.inputs.shoppingCart.products.reduce(
-//     (sum, item) => sum + item.quantity,
-//     0,
-//   );
-
-//   if (cartCount) cartCount.textContent = count;
-
-//   if (action === 'add') {
-//     showCartNotification('Produkt lagt til i handlekurven!');
-//   } else if (action === 'remove') {
-//     showCartNotification('Produkt fjernet fra handlekurven!');
-//   } else if (action === 'clear') {
-//     showCartNotification('Handlekurven er nå tom!');
-//   }
-
-//   if (cartLink) {
-//     cartLink.classList.add('bounce', 'pulse');
-//     setTimeout(() => {
-//       cartLink.classList.remove('bounce', 'pulse');
-//     }, 600);
-//   }
-
-//   if (model.app.currentPageIndex === shoppingCart) {
-//     renderCart();
-//   }
-// }
 
 function setCartItemQuantity(itemIndex, quantity) {
   if (quantity <= 0 || isNaN(quantity)) {
@@ -104,6 +88,11 @@ window.removeFromCart = removeFromCart;
 window.clearCart = clearCart;
 window.showShoppingCart = showShoppingCart;
 window.getCartItems = getCartItems;
+
+window.addEventListener('load', () => {
+  loadCartFromLocalStorage();
+  updateCartButtonView(); // Refresh cart button if needed
+});
 
 // Initialisering av handlevogn
 

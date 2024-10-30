@@ -39,20 +39,22 @@
   max-width: 300px;
   margin: 2em auto;
   padding: 12px 20px;
-  background-color: #6B7B6D;
-  color: #FFFFFF;
+  background-color: #6b7b6d;
+  color: #ffffff;
   border: none;
   border-radius: 8px;
-  font-size: 1rem;
+  font-size: var(--sizeM);
   font-weight: bold;
   text-align: center;
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
 }
 
 #installButton:hover {
-  background-color: #56705A;
+  background-color: #56705a;
   transform: translateY(-2px);
 }
 

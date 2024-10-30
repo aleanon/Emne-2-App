@@ -1,14 +1,111 @@
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  color: var(--color-text--light-bg);
+  background-color: var(--color-background-alt);
+}
+
 body {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  color: var(--color-text--light-bg);
   background-color: var(--color-background-alt);
+  font-size: var(--sizeM);
   line-height: 1.33;
 }
 
 a {
   text-decoration: none;
   color: var(--color-accent--cold);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 400;
+  line-height: 1.333;
+  margin: var(--sizeS) 0;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 500;
+}
+
+h1 {
+  font-size: var(--sizeXxxl);
+  margin-top: 0;
+}
+
+h2 {
+  font-size: var(--sizeXxl);
+  &.block__title {
+    font-size: var(--sizeL);
+  }
+}
+
+h3 {
+  font-size: var(--sizeXl);
+}
+
+h4,
+h5,
+h6 {
+  font-weight: 700;
+}
+
+h4 {
+  font-size: var(--sizeL);
+}
+
+h5,
+h6 {
+  font-size: var(--sizeM);
+}
+
+h5 {
+  border-bottom: 0.1rem solid;
+}
+
+h6 {
+  border-bottom: 0.1rem dotted;
+}
+
+@media only screen and (max-width: 992px) {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 1.11;
+  }
+  h1 {
+    font-size: var(--sizeXl);
+  }
+  h2 {
+    font-size: var(--sizeL);
+    font-weight: bolder;
+  }
+  h3 {
+    font-size: var(--sizeL);
+  }
+  h4,
+  h5,
+  h6 {
+    font-size: var(--sizeM);
+    font-weight: bolder;
+  }
+}
+
+p {
+  font-size: var(--sizeM);
 }
 
 img {

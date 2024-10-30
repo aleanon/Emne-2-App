@@ -20,7 +20,7 @@ function updateView() {
   const app = document.getElementById('app');
   const content = createCurrentPageHtml();
   const currentPage = model.pages[model.app.currentPageIndex];
-
+  console.log('Rendering Page:', currentPage);
   // Håndter innholdet basert på type
   if (content instanceof HTMLElement) {
     app.replaceChildren(content);
@@ -32,7 +32,10 @@ function updateView() {
 
   // Oppdater nettleserhistorikken
   if (model.pages.includes(currentPage)) {
-    history.pushState({ page: currentPage }, '', `#${currentPage}`);
+    const currentHash = window.location.hash.substring(1);
+    if (currentHash !== currentPage) {
+      history.pushState({ page: currentPage }, '', `#${currentPage}`);
+    }
   } else {
     console.error('Invalid page index:', currentPage);
   }
@@ -100,11 +103,14 @@ window.addEventListener('popstate', (event) => {
  * window.addEventListener('DOMContentLoaded', () => { ... });
  */
 window.addEventListener('DOMContentLoaded', () => {
-  const hash = window.location.hash.substring(1); // Ekstraherer hash uten #
-  const index = model.pages.indexOf(hash); // Får indeksen til siden basert på hash
+  const hash = window.location.hash.substring(1);
+  console.log('Current hash:', hash);
+  console.log('Available pages in model.pages:', model.pages);
 
-  // Setter currentPageIndex basert på hash, standard til cafeMenu hvis ikke funnet
-  model.app.currentPageIndex = index !== -1 ? index : cafeMenu;
+  const pageIndex = model.pages.indexOf(hash);
+  model.app.currentPageIndex =
+    pageIndex !== -1 ? pageIndex : model.pages.indexOf('kafeMeny');
+  console.log('Initial Page Index on Load:', model.app.currentPageIndex);
+
   updateView();
 });
-

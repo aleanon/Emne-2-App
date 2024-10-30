@@ -7,18 +7,18 @@ const productInventoryController = {
 
   loadData: function () {
     // Refresh products data from localStorage
-    const savedProducts = localStorage.getItem("productInventory");
+    const savedProducts = localStorage.getItem('productInventory');
     if (savedProducts) {
       model.products = JSON.parse(savedProducts);
     }
   },
 
   attachEventListeners() {
-    const searchInput = document.getElementById("searchInput");
-    const categoryFilter = document.getElementById("categoryFilter");
+    const searchInput = document.getElementById('searchInput');
+    const categoryFilter = document.getElementById('categoryFilter');
 
-    searchInput.addEventListener("input", this.searchByProductName.bind(this));
-    categoryFilter.addEventListener("change", this.filterByCategory.bind(this));
+    searchInput.addEventListener('input', this.searchByProductName.bind(this));
+    categoryFilter.addEventListener('change', this.filterByCategory.bind(this));
   },
 
   updateProductQuantity(productId, addedQuantity) {
@@ -35,7 +35,9 @@ const productInventoryController = {
   },
 
   confirmDelete(productId) {
-    const productIndex = model.products.findIndex(product => product.productId === productId);
+    const productIndex = model.products.findIndex(
+      (product) => product.productId === productId,
+    );
     if (productIndex !== -1) {
       model.products.splice(productIndex, 1);
       saveModel();
@@ -46,35 +48,43 @@ const productInventoryController = {
   },
 
   filterByCategory() {
-    const selectedCategoryIndex = document.getElementById("categoryFilter").value;
-    const filteredProducts = selectedCategoryIndex === "Alle"
-      ? model.products
-      : model.products.filter(product => product.categoryIndex == selectedCategoryIndex);
+    const selectedCategoryIndex =
+      document.getElementById('categoryFilter').value;
+    const filteredProducts =
+      selectedCategoryIndex === 'Alle'
+        ? model.products
+        : model.products.filter(
+            (product) => product.categoryIndex == selectedCategoryIndex,
+          );
 
     productInventoryView.renderInventory(filteredProducts);
   },
 
   searchByProductName() {
-    const searchTerm = document.getElementById("searchInput").value.toLowerCase();
-    const selectedCategoryIndex = document.getElementById("categoryFilter").value;
+    const searchTerm = document
+      .getElementById('searchInput')
+      .value.toLowerCase();
+    const selectedCategoryIndex =
+      document.getElementById('categoryFilter').value;
 
-    const filteredProducts = model.products
-      .filter(product =>
-        (selectedCategoryIndex === "Alle" || product.categoryIndex == selectedCategoryIndex) &&
-        product.productName.toLowerCase().includes(searchTerm)
-      );
+    const filteredProducts = model.products.filter(
+      (product) =>
+        (selectedCategoryIndex === 'Alle' ||
+          product.categoryIndex == selectedCategoryIndex) &&
+        product.productName.toLowerCase().includes(searchTerm),
+    );
 
     productInventoryView.renderInventory(filteredProducts);
   },
 
   resetSearch() {
-    document.getElementById("searchInput").value = '';
-    document.getElementById("categoryFilter").value = 'Alle';
+    document.getElementById('searchInput').value = '';
+    document.getElementById('categoryFilter').value = 'Alle';
     this.initialize(); // Refreshes the inventory view with all products
-  }
+  },
 };
 
 // Initialize the inventory on page load
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
   productInventoryController.initialize();
 });

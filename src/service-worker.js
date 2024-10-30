@@ -1,4 +1,4 @@
-const CACHE_NAME = "bakst-og-brygg-cache-v1.0.0.2-beta";
+const CACHE_NAME = "bakst-og-brygg-cache-v1.0.0-20241029221407646-beta";
 const urlsToCache = [
   "/Nettside-kafe/",
   "/Nettside-kafe/index.html",
@@ -143,20 +143,12 @@ self.addEventListener("fetch", event => {
         })
         .catch(() => caches.match(request))
     );
-  } else if (request.url.endsWith('.css') || request.url.endsWith('.js')) {
+  } else if (request.url.endsWith('.css') || request.url.endsWith('.js') || request.url.endsWith('.png') || request.url.endsWith('.jpg') || request.url.endsWith('.webp')) {
     event.respondWith(
       caches.match(request).then(response => {
         return response || fetch(request).then(networkResponse => {
-          caches.open(CACHE_NAME).then(cache => cache.put(request, networkResponse.clone()));
-          return networkResponse;
-        });
-      })
-    );
-  } else if (request.url.endsWith('.png') || request.url.endsWith('.jpg') || request.url.endsWith('.webp')) {
-    event.respondWith(
-      caches.match(request).then(response => {
-        return response || fetch(request).then(networkResponse => {
-          caches.open(CACHE_NAME).then(cache => cache.put(request, networkResponse.clone()));
+          const clonedResponse = networkResponse.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(request, clonedResponse));
           return networkResponse;
         });
       })

@@ -1,7 +1,7 @@
 /* Container and Heading */
 .checkout-container {
   background-color: var(--color-background);
-  padding: 2rem;
+  padding: var(--sizeXxl);
   border-radius: 8px;
   max-width: 600px;
   margin: 0 auto;
@@ -10,8 +10,8 @@
 
 .checkout-container h1,
 .checkout-container h2 {
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
+  font-size: var(--sizeXl);
+  margin-bottom: var(--sizeXl);
   color: var(--color-primary);
   text-align: center;
 }
@@ -20,7 +20,7 @@
 .date-picker-container,
 .time-picker-container,
 .form-group {
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--sizeXl);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -29,8 +29,8 @@
 .date-picker-container label,
 .time-picker-container label,
 .form-group label {
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
+  font-size: var(--sizeM);
+  margin-bottom: var(--sizeXs);
   color: var(--color-secondary--dark);
 }
 
@@ -39,8 +39,8 @@
 .form-group input {
   width: 50%; /* Adjust the width as needed */
   max-width: 300px; /* Add a max-width for larger screens */
-  padding: 0.75rem;
-  font-size: 1rem;
+  padding: var(--sizeS);
+  font-size: var(--sizeM);
   border: 1px solid var(--color-border);
   border-radius: 4px;
   background-color: #fff;
@@ -54,40 +54,48 @@
   outline: none;
 }
 
+.checkout__help-text {
+  font-size: var(--sizeS);
+  margin-top: var(--sizeXs);
+  text-align: center;
+}
+
 /* Order Summary */
 .order-summary {
-  margin-top: 2rem;
-  padding: 1.5rem;
+  margin-top: var(--sizeXxl);
+  padding: var(--sizeXl);
   background-color: var(--color-background-alt);
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .order-summary h3 {
-  font-size: 1.4rem;
+  font-size: var(--sizeS);
   font-weight: 600;
   color: var(--color-primary);
-  margin-bottom: 1rem;
+  margin-bottom: var(--sizeM);
 }
 
 .order-summary p {
-  font-size: 1.1rem;
+  font-size: var(--sizeL);
   color: var(--color-secondary--dark);
-  margin-bottom: 1.2rem;
+  margin-bottom: var(--sizeL);
 }
 
 /* Standout Styling for Pickup Time */
 .order-summary .pickup-time {
-  font-size: 1.3rem;
+  font-size: var(--sizeL);
   font-weight: bold;
   color: var(--color-primary);
   background-color: var(--color-secondary--light);
-  padding: 0.5rem;
+  padding: var(--sizeXs);
   border-radius: 4px;
   display: inline-block;
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--sizeXl);
 }
 
 /* Hover Effects */
@@ -96,24 +104,23 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-
 /* Confirmation Details */
 .confirmation-details {
-  margin-top: 1.5rem;
-  padding: 1rem;
+  margin-top: var(--sizeXl);
+  padding: var(--sizeM);
   background-color: var(--color-background-alt);
   border-radius: 4px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .confirmation-details p {
-  font-size: 1rem;
+  font-size: var(--sizeM);
   color: var(--color-secondary--dark);
-  margin-bottom: 1rem;
+  margin-bottom: var(--sizeM);
 }
 
 .confirmation-details .pickup-time {
-  font-size: 1.2rem;
+  font-size: var(--sizeL);
   font-weight: bold;
   color: var(--color-primary);
 }
@@ -122,16 +129,18 @@
 .button-row {
   display: flex;
   justify-content: space-between;
-  margin-top: 2rem;
+  margin-top: var(--sizeXxl);
 }
 
 .button-row button {
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
+  padding: var(--sizeS) var(--sizeXl);
+  font-size: var(--sizeM);
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .button-row button:first-child {
@@ -155,15 +164,17 @@
 
 /* Button for Confirmation Page */
 .checkout-container button {
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
+  padding: var(--sizeS) var(--sizeXl);
+  font-size: var(--sizeM);
   border: none;
   border-radius: 4px;
   cursor: pointer;
   background-color: var(--color-primary);
   color: var(--color-text--dark-bg);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  margin-top: 2rem;
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
+  margin-top: var(--sizeXxl);
   width: auto; /* Keep button width auto on desktop */
 }
 
@@ -186,7 +197,7 @@
 
   .button-row button {
     width: 100%;
-    margin-bottom: 1rem;
+    margin-bottom: var(--sizeM);
   }
 
   /* Ensure input and select fields remain accessible on smaller screens */

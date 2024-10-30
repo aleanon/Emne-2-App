@@ -1,4 +1,27 @@
 :root {
+  /*********
+  TYPOGRAPHY
+  *********/
+
+  /**
+  Fontstørrelsene i prosjektet følger en modulær skala av perfekt kvart.
+  @see https://alistapart.com/article/more-meaningful-typography/
+  @see https://www.musictheoryacademy.com/understanding-music/intervals/perfect-fourth/
+
+  */
+
+  --sizeM: 16px; /* 1.6rem */
+
+  --sizeL: calc(var(--sizeM) * 1.333); /* 1.999rem */
+  --sizeXl: calc(var(--sizeL) * 1.333); /* 2.665rem */
+  --sizeXxl: calc(var(--sizeXl) * 1.333); /* 3.553rem */
+  --sizeXxxl: calc(var(--sizeXxl) * 1.333); /* 4.736rem */
+
+  --sizeS: calc(var(--sizeM) / 1.333); /* 1.125rem */
+  --sizeXs: calc(var(--sizeS) / 1.333); /* 0.844rem */
+  --sizeXxs: calc(var(--sizeXs) / 1.333); /* 0.633rem */
+  --sizeXxxs: calc(var(--sizeXxs) / 1.333); /* 0.475rem */
+
   --color-background: #e8d9c6;
   --color-background-alt: #b7cdb5;
   --color-primary: #365042;

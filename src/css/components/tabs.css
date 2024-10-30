@@ -9,8 +9,8 @@
 
 .tab-button {
   width: 100%;
-  padding: 1rem;
-  font-size: 1.2rem;
+  padding: var(--sizeM);
+  font-size: var(--sizeL);
   background-color: var(--color-accent--cold);
   color: var(--color-secondary--dark);
   border: none;
@@ -18,7 +18,9 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
   border-bottom: 2px solid transparent;
 }
 
@@ -33,7 +35,7 @@
   background-color: var(--color-primary);
   color: var(--color-text--dark-bg);
   font-weight: bold;
-  padding: 1rem;
+  padding: var(--sizeM);
   border-bottom: 2px solid var(--color-primary);
 }
 
@@ -45,10 +47,11 @@
     margin-top: 3em;
   }
 
-  .tab-button, .selected-tab {
+  .tab-button,
+  .selected-tab {
     flex: 1;
-    padding: 0.75rem;
-    font-size: 1rem;
+    padding: var(--sizeS);
+    font-size: var(--sizeM);
     text-align: center;
     margin-bottom: 0;
     border-radius: 12px 12px 0 0;
