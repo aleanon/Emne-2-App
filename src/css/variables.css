@@ -10,7 +10,7 @@
 
   */
 
-  --sizeM: 16px; /* 1.6rem */
+  --sizeM: 1.6rem; /* 16px */
 
   --sizeL: calc(var(--sizeM) * 1.333); /* 1.999rem */
   --sizeXl: calc(var(--sizeL) * 1.333); /* 2.665rem */

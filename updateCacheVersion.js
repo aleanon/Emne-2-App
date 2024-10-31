@@ -8,11 +8,13 @@ const timestamp = new Date().toISOString().replace(/[-:.TZ]/g, '');
 fs.readFile(path, 'utf8', (err, data) => {
   if (err) throw err;
 
-  // Replace CACHE_NAME version with timestamp
+  // Replace CACHE_NAME version with updated timestamp
   const updatedData = data.replace(
-    /const CACHE_NAME = "bakst-og-brygg-cache-v1.0.0-beta";/,
-    `const CACHE_NAME = "bakst-og-brygg-cache-v1.0.0.${timestamp}-beta";`,
+    /const CACHE_NAME = "bakst-og-brygg-cache-v1\.0\.0.[0-9]+-beta";/,
+    `const CACHE_NAME = "bakst-og-brygg-cache-v1.0.0.${timestamp}-beta";`
   );
+
+
 
   fs.writeFile(path, updatedData, 'utf8', (err) => {
     if (err) throw err;

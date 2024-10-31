@@ -119,7 +119,7 @@
       <p class="project-approach__point-description"> Vi bruker Lighthouse fra Google for å måle og forbedre ytelse,
          tilgjengelighet, beste praksiser, og SEO. Gjennom regelmessige kjøringer kan vi identifisere flaskehalser og
          optimaliseringsmuligheter, noe som bidrar til en bedre brukeropplevelse og høyere kvalitet i prosjektet. <br><br>
-        <img src="docs-assets/lighthouse.webp" alt="Lighthouse"></p>
+        <img src="docs-assets/lighthouse-100.webp" alt="Lighthouse"></p>
       <h3 class="project-approach__point">
         <a href="https://gulpjs.com/" target="_blank">5. Gulp: JavaScript Task Automation</a>
       </h3>
@@ -249,61 +249,73 @@
       <h2 class="project-javascript__subtitle">JavaScript</h2>
       <h3 class="project-javascript__point">1. Modulær JavaScript-mappestruktur</h3>
       <p class="project-javascript__point-description"> Vi har brukt en modulær JavaScript-mappestruktur som organiserer
-        koden etter
-        funksjonalitet, med separate mapper for områder som autentisering, handlekurv
-        og produkter. Dette sikrer at logikken holdes isolert og lett gjenbrukbar,
-        noe som gjør prosjektet mer skalerbart og enklere å vedlikeholde. Ved å følge
-        Model-View-Controller (MVC)-tilnærmingen kan vi enkelt endre eller utvide spesifikke
-        deler uten å påvirke resten av applikasjonen, noe som fremmer en strukturert
-        og bærekraftig utviklingsprosess. </p>
-      <pre>
-				<code>
-   js/
-    ├── admin/
-    │   ├── inventoryController.js
-    │   ├── inventoryView.js
-    │   ├── ordersController.js
-    │   └── ordersView.js
-    ├── auth/
-    │   ├── authController.js
-    │   ├── loginController.js
-    │   ├── loginModel.js
-    │   └── loginView.js
-    ├── cart/
-    │   ├── cartController.js
-    │   └── cartView.js
-    ├── checkout/
-    │   ├── checkoutController.js
-    │   └── checkoutView.js
-    ├── products/
-    │   ├── cafeMenuController.js
-    │   ├── cafeMenuView.js
-    │   ├── cakeMenuController.js
-    │   └── cakeMenuView.js
-    ├── shared/
-    │   ├── common.js
-    │   ├── controller.js
-    │   ├── model.js
-    │   └── view.js
-    └── utils/
-        ├── clearLocalStorage.js
-        └── version.js
-   </code>
-			</pre>
+        koden etter funksjonalitet, med separate mapper for områder som autentisering, handlekurv og produkter. Dette 
+        sikrer at logikken holdes isolert og lett gjenbrukbar, noe som gjør prosjektet mer skalerbart og enklere å 
+        vedlikeholde. Ved å følge Model-View-Controller (MVC)-tilnærmingen kan vi enkelt endre eller utvide spesifikke
+        deler uten å påvirke resten av applikasjonen, noe som fremmer en strukturert og bærekraftig utviklingsprosess. </p>
+      <pre><code>
+      js/
+      ├── admin/
+      │   ├── ordersController.js
+      │   ├── ordersView.js
+      │   ├── pickedUpOrdersController.js
+      │   └── pickedUpOrdersView.js
+      ├── auth/
+      │   ├── authController.js
+      │   ├── loginController.js
+      │   ├── loginModel.js
+      │   └── loginView.js
+      ├── cart/
+      │   ├── cartController.js
+      │   ├── cartView.js
+      │   ├── checkoutController.js
+      │   └── checkoutView.js
+      ├── products/
+      │   ├── cafeMenuController.js
+      │   ├── cafeMenuView.js
+      │   ├── cakeMenuController.js
+      │   ├── cakeMenuView.js
+      │   ├── productAddController.js
+      │   ├── productAddView.js
+      │   ├── productEditController.js
+      │   ├── productEditView.js
+      │   ├── productInventoryController.js
+      │   └── productInventoryView.js
+      ├── shared/
+      │   ├── common.js
+      │   ├── controller.js
+      │   ├── model.js
+      │   └── view.js
+      ├── utils/
+      │   ├── clearLocalStorage.js
+      └── vendors/
+          ├── dayjs.min.js
+          ├── nb.js
+          └── purify.min.js
+      </code></pre>
       <h3 class="project-javascript__point">
-        <a href="https://eslint.org/" target="_blank">2. ESLint</a> & <a href="https://prettier.io/" target="_blank">Prettier</a>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/API/History_API" target="_blank">2. History API</a>
+      </h3>
+      <p class="project-javascript__point-description">Vi bruker <strong>History API</strong> for å gi en bedre 
+        navigasjonsopplevelse i vår en-sides applikasjon (SPA) for butikksiden. History API lar oss oppdatere URL-en i 
+        nettleseren uten å laste siden på nytt, noe som forbedrer bruk av sveiping på mobil og tilbake-knappen på 
+        desktop. Ved å opprette og administrere ruter i applikasjonen gjør vi det mulig for brukere å navigere mellom 
+        ulike sider uten full sideinnlasting, noe som gir en mer sømløs og intuitiv opplevelse.
+     </p>
+      <h3 class="project-javascript__point">
+        <a href="https://eslint.org/" target="_blank">3. ESLint</a> & <a href="https://prettier.io/" target="_blank">Prettier</a>
       </h3>
       <p class="project-javascript__point-description"> Kodekvalitet og konsistens sikres ved bruk av
         <strong>ESLint</strong> og <strong>Prettier</strong>,
         som opprettholder høy kvalitet og forhindrer typiske kodefeil. </p>
       <h3 class="project-javascript__point">
-        <a href="https://jestjs.io/" target="_blank">3. Jest</a>
+        <a href="https://jestjs.io/" target="_blank">4. Jest</a>
       </h3>
       <p class="project-javascript__point-description"> Ved hjelp av <strong>Jest</strong> sikrer vi at alle funksjoner
         fungerer som
         forventet gjennom enhetstesting, noe som gir robust og pålitelig kode. </p>
       <h3 class="project-javascript__point">
-        <a href="https://jsdoc.app/" target="_blank">4. JSDoc</a>
+        <a href="https://jsdoc.app/" target="_blank">5. JSDoc</a>
       </h3>
       <p class="project-javascript__point-description"> JSDoc brukes til å dokumentere vår JavaScript-kodebase, noe som
         gjør koden lettere
@@ -332,7 +344,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a> on Wed Oct 30 2024 11:55:58 GMT+0100 (Central European Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a> on Thu Oct 31 2024 09:53:21 GMT+0100 (Central European Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
