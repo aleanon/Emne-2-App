@@ -16,6 +16,11 @@ body {
   line-height: 1.33;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 a {
   text-decoration: none;
   color: var(--color-accent--cold);
@@ -106,9 +111,4 @@ h6 {
 
 p {
   font-size: var(--sizeM);
-}
-
-img {
-  max-width: 100%;
-  height: auto;
 }

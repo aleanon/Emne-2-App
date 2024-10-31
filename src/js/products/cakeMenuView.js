@@ -106,6 +106,7 @@ function createCakeProductCardHtml(product) {
           alt="${product.productName}"
           width="300"
           height="300"
+          loading="lazy"
         />
         <h2 class="product-card__title">${product.productName}</h2>
       </header>
@@ -221,7 +222,7 @@ function createCakeProductInfoOverlayElement() {
         </header>
         <div class="overlay__body">
 
-          <img id="cakeImage" src="./img/cakes/${defaultImage}" alt="${product.productName}" class="overlay__image" width="521" height="400">
+          <img id="cakeImage" src="./img/cakes/${defaultImage}" alt="${product.productName}" class="overlay__image" width="521" height="400" loading="lazy">
           <p class="overlay__price" id="cakePrice">${defaultPrice} Kr</p>
           <p id="productDescription">${product.description}</p>
           ${
