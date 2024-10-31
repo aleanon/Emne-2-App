@@ -11,6 +11,20 @@
       name="description"
       content="Bakst og Brygg - Bakeri og Kafé i Oslo. Bestill baguetter, kaker og kaffe online."
     />
+    <meta property="og:site_name" content="Bakst og Brygg" />
+    <meta property="og:title" content="Bakst og Brygg – Din smakfavoritt i Oslo" />
+    <meta property="og:description" content="Fra ferske baguetter og toppkaffe til kaker for enhver anledning! Nyt noe godt hos Bakst og Brygg i dag eller bestill en spesialkake for din neste feiring." />
+    <meta property="og:image" content="https://aleanon.github.io/Nettside-kafe/img/open-graph_bakst-og-brygg.png" />
+    <meta property="og:url" content="https://aleanon.github.io/Nettside-kafe/" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Bakst og Brygg – Din smakfavoritt i Oslo" />
+    <meta name="twitter:description" content="Fra ferske baguetter og toppkaffe til kaker for enhver anledning! Nyt noe godt hos Bakst og Brygg i dag eller bestill en spesialkake for din neste feiring." />
+    <meta name="twitter:image" content="https://aleanon.github.io/Nettside-kafe/img/open-graph_bakst-og-brygg.png" />
+    <meta name="twitter:url" content="https://aleanon.github.io/Nettside-kafe/" />
+    <meta property="og:site_name" content="Bakst og Brygg" />
+
+    <meta property="og:locale" content="nb_NO" />
     <link rel="manifest" href="manifest.json">
 
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
@@ -24,7 +38,8 @@
   <body>
     <header id="header-container">
       <div id="nav-row">
-        <a href="index.html#kafeMeny" onclick="goToCafeMenu()">
+        <a href="index.html#kafeMeny" onclick="goToCafeMenu()"
+          aria-label="Gå til hovedsiden">
         <img
           width="80"
           height="80"
@@ -32,7 +47,6 @@
           alt="Bakst og Brygg logo"
           class="header__logo-image"
           role="button"
-          aria-label="Gå til hovedsiden"
         /></a>
 
         <button
@@ -156,8 +170,8 @@
       <div class="footer__bottom">
         <p class="footer__copyright">
           <a href="#" onclick="clearLocalStorage(); return false;"
-            >© 2024 Bakst og Brygg. Alle rettigheter reservert.</a
-          >
+            >©</a
+          > 2024 Bakst og Brygg. Alle rettigheter reservert.
         </p>
         <a
           class="footer__link footer__link--admin"
