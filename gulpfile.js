@@ -3,7 +3,6 @@ const concat = require('gulp-concat');
 const cleanCSS = require('gulp-clean-css');
 const htmlReplace = require('gulp-html-replace');
 const uglify = require('gulp-uglify');
-const gulpIf = require('gulp-if');
 const copy = require('gulp-copy');
 
 const uglifyOptions = { output: { comments: false } };

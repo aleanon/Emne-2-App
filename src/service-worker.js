@@ -1,4 +1,4 @@
-const CACHE_NAME = "bakst-og-brygg-cache-v1.0.0-20241029221407646-beta";
+const CACHE_NAME = "bakst-og-brygg-cache-v1.0.0.20241031085321897-beta";
 const urlsToCache = [
   "/Nettside-kafe/",
   "/Nettside-kafe/index.html",
@@ -132,6 +132,10 @@ self.addEventListener("install", (event) => {
 
 self.addEventListener("fetch", event => {
   const { request } = event;
+
+  if (request.url.startsWith("chrome-extension")) {
+    return;
+  }
 
   if (request.url.includes('/api/')) {
     event.respondWith(
